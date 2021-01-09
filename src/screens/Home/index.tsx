@@ -1,27 +1,24 @@
-import React from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {useQuery} from '@apollo/client';
+import React, {useState} from 'react';
+import {View} from 'react-native';
 
 import List from '../../components/List';
+import Loader from '../../components/Loader';
+import {GET_PEOPLE} from '../../utils/graphql';
 
 import styles from './style';
 
-const mockData = [
-  {key: 'Devin'},
-  {key: 'Dan'},
-  {key: 'Dominic'},
-  {key: 'Jackson'},
-  {key: 'James'},
-  {key: 'Joel'},
-  {key: 'John'},
-  {key: 'Jillian'},
-  {key: 'Jimmy'},
-  {key: 'Julie'},
-];
-
 const Home = () => {
+  const {loading, error, data} = useQuery(GET_PEOPLE);
+
+  console.log('loading', loading);
+  console.log('error', error);
+  console.log('data', data);
+
   return (
     <View style={styles.container}>
-      <List data={mockData} />
+      {loading && <Loader />}
+      {!loading && <List data={data.allPeople.people} />}
     </View>
   );
 };

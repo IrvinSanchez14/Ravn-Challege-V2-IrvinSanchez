@@ -9,7 +9,7 @@ const List = (props: IListProps) => {
   return (
     <FlatList
       data={data}
-      renderItem={() => <CardList header={'test'} subHeader={'sub test'} />}
+      renderItem={({item}) => <CardList property={item} />}
     />
   );
 };

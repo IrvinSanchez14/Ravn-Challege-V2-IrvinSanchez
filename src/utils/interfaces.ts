@@ -3,10 +3,19 @@ export interface IListProps {
 }
 
 export interface ICardListProps {
-  header: string;
-  subHeader: string;
+  property: IDataStarWarsProps;
 }
 
 export interface IDataStarWarsProps {
-  key: string;
+  name: string;
+  species?: ISpeciesProps;
+  homeworld: IHomeWorldProps;
+}
+
+interface ISpeciesProps {
+  name: string;
+}
+
+interface IHomeWorldProps {
+  name: string;
 }

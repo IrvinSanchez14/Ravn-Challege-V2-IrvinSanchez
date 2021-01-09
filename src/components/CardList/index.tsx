@@ -9,15 +9,20 @@ import {ICardListProps} from '../../utils/interfaces';
 import styles from './style';
 
 const CardList = (props: ICardListProps) => {
-  const {header, subHeader} = props;
+  const {property} = props;
+  console.log('header', property);
 
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => console.log('press function')}>
       <View>
-        <Text style={styles.header}>{header}</Text>
-        <Text style={styles.subHeader}>{subHeader}</Text>
+        <Text style={styles.header}>{property.name}</Text>
+        <Text style={styles.subHeader}>
+          {`${
+            property.species !== null ? property.species?.name : 'Human'
+          } from ${property.homeworld.name}`}
+        </Text>
       </View>
       <FontAwesomeIcon icon={faChevronRight} />
     </TouchableOpacity>
