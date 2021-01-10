@@ -1,13 +1,9 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
+import {ApolloProvider} from '@apollo/client';
 
 import Route from './config/route';
-
-const client = new ApolloClient({
-  uri: 'https://swapi-graphql.netlify.app/.netlify/functions/index',
-  cache: new InMemoryCache(),
-});
+import {client} from './config/apollo';
 
 const App = () => {
   return (

@@ -3,6 +3,7 @@ import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import Home from '../screens/Home';
+import Details from '../screens/Detail';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,19 @@ const Route = () => {
         component={Home}
         options={{
           title: 'People of Star Wars',
+          headerTitleStyle: {
+            alignSelf: 'center',
+          },
+          headerStyle: {
+            backgroundColor: '#121212',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+      <Stack.Screen
+        name="Details"
+        component={Details}
+        options={{
           headerTitleStyle: {
             alignSelf: 'center',
           },

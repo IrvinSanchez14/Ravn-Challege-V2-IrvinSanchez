@@ -1,8 +1,8 @@
 import {gql} from '@apollo/client';
 
 export const GET_PEOPLE = gql`
-  query getAllPeople($test: String) {
-    allPeople(first: 5, after: $test) {
+  query getAllPeople($time: String) {
+    allPeople(first: 5, after: $time) {
       people {
         id
         name
@@ -19,3 +19,19 @@ export const GET_PEOPLE = gql`
       totalCount
     }
   }`;
+
+  export const GET_DESCRIPTION_CHARACTER = gql`
+    query getDescription($id: ID){
+      person(id: $id) {
+        eyeColor
+        hairColor
+        skinColor
+        birthYear
+        vehicleConnection {
+          vehicles {
+            name
+          }
+        }
+      }
+    }
+`;

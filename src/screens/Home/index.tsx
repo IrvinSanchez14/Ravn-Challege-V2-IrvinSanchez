@@ -1,24 +1,56 @@
 import {useQuery} from '@apollo/client';
-import React, {useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
+import ErrorMessage from '../../components/ErrorMessage';
 
 import List from '../../components/List';
 import Loader from '../../components/Loader';
 import {GET_PEOPLE} from '../../utils/graphql';
+import {IBodyAPI} from '../../utils/interfaces';
 
 import styles from './style';
 
 const Home = () => {
-  const {loading, error, data} = useQuery(GET_PEOPLE);
+  const {loading, error, data, fetchMore} = useQuery(GET_PEOPLE, {
+    variables: {
+      time: null,
+    },
+  });
 
-  console.log('loading', loading);
-  console.log('error', error);
-  console.log('data', data);
+  const getRefreshData = () => {
+    const {allPeople} = data;
+
+    fetchMore({
+      variables: {time: allPeople.pageInfo.endCursor},
+      updateQuery: (prev: IBodyAPI, {fetchMoreResult}) => {
+        if (
+          !fetchMoreResult ||
+          allPeople.people.length === allPeople.totalCount
+        ) {
+          return prev;
+        }
+        fetchMoreResult.allPeople.people = [
+          ...prev.allPeople.people,
+          ...fetchMoreResult.allPeople.people,
+        ];
+        return fetchMoreResult;
+      },
+    });
+  };
+
+  if (error) {
+    return <ErrorMessage />;
+  }
 
   return (
     <View style={styles.container}>
       {loading && <Loader />}
-      {!loading && <List data={data.allPeople.people} />}
+      {!loading && (
+        <List
+          data={data.allPeople.people}
+          refreshData={() => getRefreshData()}
+        />
+      )}
     </View>
   );
 };

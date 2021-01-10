@@ -1,15 +1,16 @@
 import React from 'react';
-import {FlatList, Text} from 'react-native';
+import {FlatList} from 'react-native';
 import {IListProps} from '../../utils/interfaces';
 import CardList from '../CardList';
 
 const List = (props: IListProps) => {
-  const {data} = props;
+  const {data, refreshData} = props;
 
   return (
     <FlatList
       data={data}
       renderItem={({item}) => <CardList property={item} />}
+      onEndReached={() => refreshData()}
     />
   );
 };
