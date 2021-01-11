@@ -2,8 +2,8 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import Home from '../screens/Home';
-import Details from '../screens/Detail';
+import {Home} from '../screens/Home';
+import {Detail} from '../screens/Detail';
 
 const Stack = createStackNavigator();
 
@@ -26,7 +26,7 @@ const Route = () => {
       />
       <Stack.Screen
         name="Details"
-        component={Details}
+        component={Detail}
         options={{
           headerTitleStyle: {
             alignSelf: 'center',

@@ -5,9 +5,9 @@ import {Text, View} from 'react-native';
 
 import {GET_DESCRIPTION_CHARACTER} from '../../utils/graphql';
 import styles from './style';
-import TableDetail from '../../components/TableDetail';
-import ErrorMessage from '../../components/ErrorMessage';
-import Loader from '../../components/Loader';
+import {TableDetail} from '../../components/TableDetail';
+import {ErrorMessage} from '../../components/ErrorMessage';
+import {Loader} from '../../components/Loader';
 import {IDetailScreenProps, IVehicleProps} from '../../utils/interfaces';
 
 const Details = (props: IDetailScreenProps) => {
